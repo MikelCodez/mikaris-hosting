@@ -13,15 +13,43 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-            background: #000000;
-            color: #FFD700;
+            background: #0a0c12;
+            color: #e8e8e8;
             line-height: 1.6;
+            position: relative;
+        }
+
+        /* Starfield background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 60px 120px, #ffd700, rgba(0,0,0,0)),
+                radial-gradient(3px 3px at 200px 80px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 350px 250px, #ffd700, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 500px 400px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 700px 150px, #ffd700, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 850px 600px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 1000px 300px, #ffd700, rgba(0,0,0,0)),
+                radial-gradient(3px 3px at 1150px 500px, #ffffff, rgba(0,0,0,0));
+            background-size: 200px 200px;
+            background-repeat: repeat;
+            opacity: 0.6;
+            pointer-events: none;
+            z-index: 0;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 24px;
+            position: relative;
+            z-index: 1;
         }
 
         /* Header */
@@ -30,7 +58,7 @@
             border-bottom: 1px solid rgba(255, 215, 0, 0.2);
             position: sticky;
             top: 0;
-            background: rgba(0, 0, 0, 0.95);
+            background: rgba(10, 12, 18, 0.95);
             backdrop-filter: blur(10px);
             z-index: 100;
         }
@@ -44,12 +72,26 @@
         }
 
         .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
             font-size: 24px;
             font-weight: bold;
-            background: linear-gradient(135deg, #FFD700, #FFA500);
+            background: linear-gradient(135deg, #e8e8e8, #ffd700);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+        }
+
+        .moon-icon {
+            font-size: 28px;
+            filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.5));
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-3px); }
         }
 
         .nav-links {
@@ -60,13 +102,13 @@
         }
 
         .nav-links a {
-            color: #FFD700;
+            color: #e8e8e8;
             text-decoration: none;
             transition: color 0.2s, text-shadow 0.2s;
         }
 
         .nav-links a:hover {
-            color: #FFA500;
+            color: #ffd700;
             text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
         }
 
@@ -90,10 +132,17 @@
             padding: 80px 0 60px;
         }
 
+        .hero-moon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.3));
+            animation: float 6s ease-in-out infinite;
+        }
+
         .hero h1 {
             font-size: 48px;
             font-weight: 800;
-            background: linear-gradient(135deg, #FFD700, #FFA500);
+            background: linear-gradient(135deg, #ffffff, #ffd700, #ff8c00);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -102,8 +151,7 @@
 
         .hero p {
             font-size: 20px;
-            color: #FFD700;
-            opacity: 0.8;
+            color: #c0c0c0;
             max-width: 600px;
             margin: 0 auto 32px;
         }
@@ -116,10 +164,10 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #FFD700, #FFA500);
+            background: linear-gradient(135deg, #ffd700, #ff8c00);
             padding: 12px 32px;
             border-radius: 40px;
-            color: #000000;
+            color: #0a0c12;
             text-decoration: none;
             font-weight: 600;
             transition: transform 0.2s, box-shadow 0.2s;
@@ -135,7 +183,7 @@
             background: rgba(255, 215, 0, 0.1);
             padding: 12px 32px;
             border-radius: 40px;
-            color: #FFD700;
+            color: #ffd700;
             text-decoration: none;
             font-weight: 600;
             border: 1px solid rgba(255, 215, 0, 0.5);
@@ -155,7 +203,12 @@
             text-align: center;
             font-size: 36px;
             margin-bottom: 48px;
-            color: #FFD700;
+            color: #ffd700;
+        }
+
+        .section-title::before {
+            content: "🌙 ";
+            font-size: 32px;
         }
 
         .pricing-grid {
@@ -165,53 +218,57 @@
         }
 
         .pricing-card {
-            background: rgba(10, 10, 15, 0.9);
+            background: rgba(15, 17, 25, 0.9);
             border-radius: 20px;
             padding: 28px;
             text-align: center;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 215, 0, 0.2);
-            transition: transform 0.2s, border-color 0.2s;
+            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
         }
 
         .pricing-card:hover {
             transform: translateY(-4px);
-            border-color: #FFD700;
+            border-color: #ffd700;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.1);
+        }
+
+        .plan-icon {
+            font-size: 40px;
+            margin-bottom: 16px;
         }
 
         .plan-name {
             font-size: 24px;
             font-weight: 700;
             margin-bottom: 16px;
-            color: #FFD700;
+            color: #ffd700;
         }
 
         .plan-price {
             font-size: 36px;
             font-weight: 800;
-            color: #FFD700;
+            color: #ffd700;
             margin-bottom: 8px;
         }
 
         .plan-price small {
             font-size: 14px;
-            color: #FFD700;
-            opacity: 0.7;
+            color: #c0c0c0;
             font-weight: normal;
         }
 
         .plan-specs {
-            color: #FFD700;
-            opacity: 0.7;
+            color: #c0c0c0;
             margin: 16px 0;
             font-size: 14px;
         }
 
         .plan-btn {
-            background: rgba(255, 215, 0, 0.15);
+            background: rgba(255, 215, 0, 0.1);
             padding: 10px 24px;
             border-radius: 30px;
-            color: #FFD700;
+            color: #ffd700;
             text-decoration: none;
             display: inline-block;
             margin-top: 16px;
@@ -233,9 +290,15 @@
         .feature {
             text-align: center;
             padding: 24px;
-            background: rgba(10, 10, 15, 0.8);
+            background: rgba(15, 17, 25, 0.8);
             border-radius: 16px;
             border: 1px solid rgba(255, 215, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .feature:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255, 215, 0, 0.3);
         }
 
         .feature-icon {
@@ -245,12 +308,11 @@
 
         .feature h3 {
             margin-bottom: 8px;
-            color: #FFD700;
+            color: #ffd700;
         }
 
         .feature p {
-            color: #FFD700;
-            opacity: 0.7;
+            color: #c0c0c0;
             font-size: 14px;
         }
 
@@ -261,22 +323,26 @@
         }
 
         .faq-item {
-            background: rgba(10, 10, 15, 0.8);
+            background: rgba(15, 17, 25, 0.8);
             border-radius: 12px;
             padding: 20px;
             margin-bottom: 16px;
             border: 1px solid rgba(255, 215, 0, 0.1);
+            transition: border-color 0.2s;
+        }
+
+        .faq-item:hover {
+            border-color: rgba(255, 215, 0, 0.3);
         }
 
         .faq-question {
             font-weight: 600;
             margin-bottom: 8px;
-            color: #FFD700;
+            color: #ffd700;
         }
 
         .faq-answer {
-            color: #FFD700;
-            opacity: 0.7;
+            color: #c0c0c0;
             font-size: 14px;
         }
 
@@ -290,7 +356,7 @@
         }
 
         .footer a {
-            color: #FFD700;
+            color: #ffd700;
             text-decoration: none;
         }
 
@@ -321,6 +387,9 @@
                 flex-direction: column;
                 text-align: center;
             }
+            .hero-moon {
+                font-size: 60px;
+            }
         }
     </style>
 </head>
@@ -328,7 +397,10 @@
     <header class="header">
         <div class="container">
             <div class="header-inner">
-                <div class="logo">⚡ MIKARIS HOSTING</div>
+                <div class="logo">
+                    <span class="moon-icon">🌙</span>
+                    <span>MIKARIS HOSTING</span>
+                </div>
                 <div class="nav-links">
                     <a href="#pricing">Pricing</a>
                     <a href="#features">Features</a>
@@ -342,7 +414,8 @@
     <main>
         <div class="container">
             <div class="hero">
-                <h1>Game Server Hosting<br>That Doesn't Break the Bank</h1>
+                <div class="hero-moon">🌙✨</div>
+                <h1>Game Server Hosting<br>From the Cosmos</h1>
                 <p>Lightning-fast NVMe storage, DDoS protection, and 24/7 support. Launch your game server in minutes.</p>
                 <div class="hero-buttons">
                     <a href="#pricing" class="btn-primary">View Plans →</a>
@@ -353,30 +426,34 @@
 
         <div id="pricing" class="section">
             <div class="container">
-                <h2 class="section-title">💰 Founder's Launch Pricing</h2>
+                <h2 class="section-title">Founder's Launch Pricing</h2>
                 <div class="pricing-grid">
                     <div class="pricing-card">
+                        <div class="plan-icon">🌙</div>
                         <div class="plan-name">Micro</div>
                         <div class="plan-price">$8<small>/3 months</small></div>
-                        <div class="plan-specs">1 GB RAM · 15 GB NVMe</div>
+                        <div class="plan-specs">🌙 1 GB RAM · 15 GB NVMe</div>
                         <a href="https://discord.gg/hNErDGEJ5P" class="plan-btn">Claim Slot →</a>
                     </div>
                     <div class="pricing-card">
+                        <div class="plan-icon">🌙🌙</div>
                         <div class="plan-name">Budget</div>
                         <div class="plan-price">$13<small>/3 months</small></div>
-                        <div class="plan-specs">2 GB RAM · 25 GB NVMe</div>
+                        <div class="plan-specs">🌙🌙 2 GB RAM · 25 GB NVMe</div>
                         <a href="https://discord.gg/hNErDGEJ5P" class="plan-btn">Claim Slot →</a>
                     </div>
                     <div class="pricing-card">
+                        <div class="plan-icon">🌙🌙🌙</div>
                         <div class="plan-name">Standard</div>
                         <div class="plan-price">$25<small>/3 months</small></div>
-                        <div class="plan-specs">4 GB RAM · 50 GB NVMe</div>
+                        <div class="plan-specs">🌙🌙🌙 4 GB RAM · 50 GB NVMe</div>
                         <a href="https://discord.gg/hNErDGEJ5P" class="plan-btn">Claim Slot →</a>
                     </div>
                     <div class="pricing-card">
+                        <div class="plan-icon">🌙🌙🌙🌙</div>
                         <div class="plan-name">Premium</div>
                         <div class="plan-price">$38<small>/3 months</small></div>
-                        <div class="plan-specs">8 GB RAM · 100 GB NVMe</div>
+                        <div class="plan-specs">🌙🌙🌙🌙 8 GB RAM · 100 GB NVMe</div>
                         <a href="https://discord.gg/hNErDGEJ5P" class="plan-btn">Claim Slot →</a>
                     </div>
                 </div>
@@ -385,7 +462,7 @@
 
         <div id="features" class="section">
             <div class="container">
-                <h2 class="section-title">✨ Why Choose Mikaris?</h2>
+                <h2 class="section-title">Why Choose Mikaris?</h2>
                 <div class="features-grid">
                     <div class="feature">
                         <div class="feature-icon">🛡️</div>
@@ -423,10 +500,10 @@
 
         <div id="faq" class="section">
             <div class="container">
-                <h2 class="section-title">❓ Frequently Asked Questions</h2>
+                <h2 class="section-title">Frequently Asked Questions</h2>
                 <div class="faq-grid">
                     <div class="faq-item">
-                        <div class="faq-question">💳 How do I pay?</div>
+                        <div class="faq-question">🌙 How do I pay?</div>
                         <div class="faq-answer">We accept PayPal, CashApp, Venmo, and Cryptocurrency. DM us on Discord to place an order.</div>
                     </div>
                     <div class="faq-item">
@@ -452,11 +529,14 @@
 
     <footer class="footer">
         <div class="container">
-            <div class="logo" style="margin-bottom: 16px;">⚡ MIKARIS HOSTING</div>
-            <p style="color: #FFD700; opacity: 0.7; margin-bottom: 24px;">Affordable, secure game server hosting for everyone.</p>
+            <div class="logo" style="margin-bottom: 16px; justify-content: center;">
+                <span class="moon-icon">🌙</span>
+                <span>MIKARIS HOSTING</span>
+            </div>
+            <p style="color: #c0c0c0; margin-bottom: 24px;">Affordable, secure game server hosting from the cosmos.</p>
             <a href="https://discord.gg/hNErDGEJ5P" class="discord-invite">Join Our Discord →</a>
-            <p style="margin-top: 32px; font-size: 12px; color: #FFD700; opacity: 0.4;">
-                © 2026 Mikaris Hosting. All rights reserved.
+            <p style="margin-top: 32px; font-size: 12px; color: #c0c0c0; opacity: 0.4;">
+                © 2026 Mikaris Hosting. All rights reserved. 🌙✨
             </p>
         </div>
     </footer>
