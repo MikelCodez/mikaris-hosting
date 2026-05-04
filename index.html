@@ -17,9 +17,10 @@
             color: #e8e8e8;
             line-height: 1.6;
             position: relative;
+            overflow-x: hidden;
         }
 
-        /* Starfield background */
+        /* Starfield background - static stars */
         body::before {
             content: '';
             position: fixed;
@@ -36,12 +37,140 @@
                 radial-gradient(1px 1px at 700px 150px, #ffd700, rgba(0,0,0,0)),
                 radial-gradient(2px 2px at 850px 600px, #ffffff, rgba(0,0,0,0)),
                 radial-gradient(1px 1px at 1000px 300px, #ffd700, rgba(0,0,0,0)),
-                radial-gradient(3px 3px at 1150px 500px, #ffffff, rgba(0,0,0,0));
-            background-size: 200px 200px;
-            background-repeat: repeat;
-            opacity: 0.6;
+                radial-gradient(3px 3px at 1150px 500px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 1300px 700px, #ffd700, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 1450px 200px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 1600px 550px, #ffd700, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 1750px 350px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(3px 3px at 1900px 800px, #ffd700, rgba(0,0,0,0));
+            background-size: 2000px 1000px;
+            background-repeat: no-repeat;
+            opacity: 0.8;
             pointer-events: none;
             z-index: 0;
+        }
+
+        /* Shooting Stars Animation */
+        .shooting-star {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            background: linear-gradient(135deg, #fff, rgba(255,215,0,0.8));
+            border-radius: 50%;
+            filter: blur(1px);
+            opacity: 0;
+            animation: shoot 2s ease-out forwards;
+        }
+
+        @keyframes shoot {
+            0% {
+                transform: translateX(0) translateY(0);
+                opacity: 1;
+                width: 3px;
+                height: 3px;
+            }
+            20% {
+                opacity: 1;
+            }
+            80% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateX(-300px) translateY(150px);
+                opacity: 0;
+                width: 1px;
+                height: 1px;
+            }
+        }
+
+        /* Meteor Animation */
+        .meteor {
+            position: absolute;
+            background: linear-gradient(135deg, #ff6600, #ff3300, #ffcc00);
+            border-radius: 50%;
+            filter: blur(2px);
+            opacity: 0;
+            animation: meteorFall 3s ease-out forwards;
+        }
+
+        .meteor::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,100,0,0.8), transparent);
+            filter: blur(4px);
+        }
+
+        @keyframes meteorFall {
+            0% {
+                transform: translateX(0) translateY(0);
+                opacity: 1;
+                width: 6px;
+                height: 6px;
+            }
+            10% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.9;
+            }
+            100% {
+                transform: translateX(-500px) translateY(300px);
+                opacity: 0;
+                width: 2px;
+                height: 2px;
+            }
+        }
+
+        /* Comet Animation */
+        .comet {
+            position: absolute;
+            background: linear-gradient(135deg, #87CEEB, #ffffff, #e0f0ff);
+            border-radius: 50%;
+            filter: blur(3px);
+            opacity: 0;
+            animation: cometFly 8s ease-out forwards;
+        }
+
+        .comet-tail {
+            position: absolute;
+            background: linear-gradient(90deg, rgba(135,206,235,0.8), rgba(255,255,255,0));
+            height: 4px;
+            border-radius: 2px;
+            filter: blur(2px);
+        }
+
+        @keyframes cometFly {
+            0% {
+                transform: translateX(0) translateY(0);
+                opacity: 1;
+                width: 10px;
+                height: 10px;
+            }
+            20% {
+                opacity: 1;
+            }
+            80% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateX(-800px) translateY(400px);
+                opacity: 0;
+                width: 3px;
+                height: 3px;
+            }
         }
 
         .container {
@@ -394,6 +523,9 @@
     </style>
 </head>
 <body>
+
+    <div class="shooting-star" id="shootingStarContainer"></div>
+
     <header class="header">
         <div class="container">
             <div class="header-inner">
@@ -536,9 +668,131 @@
             <p style="color: #c0c0c0; margin-bottom: 24px;">Affordable, secure game server hosting from the cosmos.</p>
             <a href="https://discord.gg/hNErDGEJ5P" class="discord-invite">Join Our Discord →</a>
             <p style="margin-top: 32px; font-size: 12px; color: #c0c0c0; opacity: 0.4;">
-                © 2026 Mikaris Hosting. All rights reserved. 🌙✨
+                © 2026 Mikaris Hosting. All rights reserved. 🌙✨☄️
             </p>
         </div>
     </footer>
+
+    <script>
+        // Cosmic Event Scheduler
+        const container = document.getElementById('shootingStarContainer');
+        
+        // Helper function to create an element at random position
+        function createRandomPosition() {
+            return {
+                x: Math.random() * (window.innerWidth + 200) - 100,
+                y: Math.random() * (window.innerHeight / 2)
+            };
+        }
+
+        // Shooting Star (frequent, small, fast)
+        function createShootingStar() {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            const pos = createRandomPosition();
+            star.style.left = pos.x + 'px';
+            star.style.top = pos.y + 'px';
+            container.appendChild(star);
+            setTimeout(() => star.remove(), 2000);
+        }
+
+        // Meteor (less frequent, larger, slower, orange/red)
+        function createMeteor() {
+            const meteor = document.createElement('div');
+            meteor.classList.add('meteor');
+            const pos = createRandomPosition();
+            meteor.style.left = pos.x + 'px';
+            meteor.style.top = pos.y + 'px';
+            container.appendChild(meteor);
+            setTimeout(() => meteor.remove(), 3000);
+        }
+
+        // Comet (rare, very large, blue/white, with tail effect)
+        function createComet() {
+            const comet = document.createElement('div');
+            comet.classList.add('comet');
+            const pos = createRandomPosition();
+            comet.style.left = pos.x + 'px';
+            comet.style.top = pos.y + 'px';
+            
+            // Add comet tail
+            const tail = document.createElement('div');
+            tail.classList.add('comet-tail');
+            tail.style.width = '80px';
+            tail.style.height = '4px';
+            tail.style.top = '3px';
+            tail.style.left = '-80px';
+            comet.appendChild(tail);
+            
+            container.appendChild(comet);
+            setTimeout(() => comet.remove(), 8000);
+        }
+
+        // Time-based scheduler
+        let timeOnSite = 0;
+        let meteorTimer = null;
+        let cometTimer = null;
+        
+        // Regular Shooting Stars - every 3-6 seconds
+        setInterval(() => {
+            createShootingStar();
+        }, Math.random() * 3000 + 3000);
+        
+        // Meteor Scheduler - becomes more frequent over time
+        function scheduleMeteors() {
+            if (meteorTimer) clearTimeout(meteorTimer);
+            
+            let delay;
+            if (timeOnSite < 30000) { // First 30 seconds: no meteors
+                delay = 30000 - timeOnSite;
+            } else if (timeOnSite < 120000) { // 30-120 seconds: every 20-30 seconds
+                delay = Math.random() * 10000 + 20000;
+            } else { // After 2 minutes: every 10-20 seconds
+                delay = Math.random() * 10000 + 10000;
+            }
+            
+            meteorTimer = setTimeout(() => {
+                createMeteor();
+                scheduleMeteors();
+            }, delay);
+        }
+        
+        // Comet Scheduler - appears after longer intervals
+        function scheduleComet() {
+            if (cometTimer) clearTimeout(cometTimer);
+            
+            let delay;
+            if (timeOnSite < 60000) { // First minute: no comet
+                delay = 60000 - timeOnSite;
+            } else if (timeOnSite < 180000) { // 1-3 minutes: comet after 45 seconds
+                delay = 45000;
+            } else if (timeOnSite < 300000) { // 3-5 minutes: comet every 60-90 seconds
+                delay = Math.random() * 30000 + 60000;
+            } else { // After 5+ minutes: comet every 2-3 minutes
+                delay = Math.random() * 60000 + 120000;
+            }
+            
+            cometTimer = setTimeout(() => {
+                createComet();
+                scheduleComet();
+            }, delay);
+        }
+        
+        // Update time on site and start schedulers
+        setInterval(() => {
+            timeOnSite += 1000;
+        }, 1000);
+        
+        scheduleMeteors();
+        scheduleComet();
+        
+        // Also create a few initial stars to set the mood
+        setTimeout(() => {
+            createShootingStar();
+        }, 1000);
+        setTimeout(() => {
+            createShootingStar();
+        }, 3000);
+    </script>
 </body>
 </html>
