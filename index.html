@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mikaris Hosting | Game Server Hosting</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(135deg, #0a0a0f 0%, #0f0f1a 100%);
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        .header {
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(108, 99, 255, 0.2);
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #6c63ff, #a855f7);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: #a1a1aa;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #6c63ff;
+        }
+
+        .discord-btn {
+            background: #5865F2;
+            padding: 8px 20px;
+            border-radius: 8px;
+            color: white !important;
+            font-weight: 500;
+        }
+
+        .discord-btn:hover {
+            background: #4752c4;
+            transform: translateY(-1px);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 80px 0 60px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff, #6c63ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: #a1a1aa;
+            max-width: 600px;
+            margin: 0 auto 32px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #6c63ff, #a855f7);
+            padding: 12px 32px;
+            border-radius: 40px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(108, 99, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 12px 32px;
+            border-radius: 40px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            border: 1px solid rgba(108, 99, 255, 0.5);
+            transition: background 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(108, 99, 255, 0.2);
+        }
+
+        /* Pricing Section */
+        .section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 48px;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+        }
+
+        .pricing-card {
+            background: rgba(30, 30, 40, 0.8);
+            border-radius: 20px;
+            padding: 28px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(108, 99, 255, 0.2);
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-4px);
+            border-color: #6c63ff;
+        }
+
+        .plan-name {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .plan-price {
+            font-size: 36px;
+            font-weight: 800;
+            color: #6c63ff;
+            margin-bottom: 8px;
+        }
+
+        .plan-price small {
+            font-size: 14px;
+            color: #a1a1aa;
+            font-weight: normal;
+        }
+
+        .plan-specs {
+            color: #a1a1aa;
+            margin: 16px 0;
+            font-size: 14px;
+        }
+
+        .plan-btn {
+            background: rgba(108, 99, 255, 0.2);
+            padding: 10px 24px;
+            border-radius: 30px;
+            color: #6c63ff;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 16px;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .plan-btn:hover {
+            background: rgba(108, 99, 255, 0.4);
+        }
+
+        /* Features */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 16px;
+        }
+
+        .feature h3 {
+            margin-bottom: 8px;
+        }
+
+        .feature p {
+            color: #a1a1aa;
+            font-size: 14px;
+        }
+
+        /* FAQ */
+        .faq-grid {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: rgba(30, 30, 40, 0.6);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .faq-question {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #6c63ff;
+        }
+
+        .faq-answer {
+            color: #a1a1aa;
+            font-size: 14px;
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(0, 0, 0, 0.3);
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 40px;
+        }
+
+        .footer a {
+            color: #6c63ff;
+            text-decoration: none;
+        }
+
+        .discord-invite {
+            background: #5865F2;
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 40px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+            .section-title {
+                font-size: 28px;
+            }
+            .header-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">⚡ MIKARIS HOSTING</div>
+                <div class="nav-links">
+                    <a href="#pricing">Pricing</a>
+                    <a href="#features">Features</a>
+                    <a href="#faq">FAQ</a>
+                    <a href="YOUR_DISCORD_INVITE_LINK" class="discord-btn">Discord</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="hero">
+                <h1>Game Server Hosting<br>That Doesn't Break the Bank</h1>
+                <p>Lightning-fast NVMe storage, DDoS protection, and 24/7 support. Launch your game server in minutes.</p>
+                <div class="hero-buttons">
+                    <a href="#pricing" class="btn-primary">View Plans →</a>
+                    <a href="YOUR_DISCORD_INVITE_LINK" class="btn-secondary">Join Discord</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="pricing" class="section">
+            <div class="container">
+                <h2 class="section-title">Founder's Launch Pricing</h2>
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <div class="plan-name">Micro</div>
+                        <div class="plan-price">$8<small>/3 months</small></div>
+                        <div class="plan-specs">1 GB RAM · 15 GB NVMe</div>
+                        <a href="YOUR_DISCORD_INVITE_LINK" class="plan-btn">Claim Slot →</a>
+                    </div>
+                    <div class="pricing-card">
+                        <div class="plan-name">Budget</div>
+                        <div class="plan-price">$13<small>/3 months</small></div>
+                        <div class="plan-specs">2 GB RAM · 25 GB NVMe</div>
+                        <a href="YOUR_DISCORD_INVITE_LINK" class="plan-btn">Claim Slot →</a>
+                    </div>
+                    <div class="pricing-card">
+                        <div class="plan-name">Standard</div>
+                        <div class="plan-price">$25<small>/3 months</small></div>
+                        <div class="plan-specs">4 GB RAM · 50 GB NVMe</div>
+                        <a href="YOUR_DISCORD_INVITE_LINK" class="plan-btn">Claim Slot →</a>
+                    </div>
+                    <div class="pricing-card">
+                        <div class="plan-name">Premium</div>
+                        <div class="plan-price">$38<small>/3 months</small></div>
+                        <div class="plan-specs">8 GB RAM · 100 GB NVMe</div>
+                        <a href="YOUR_DISCORD_INVITE_LINK" class="plan-btn">Claim Slot →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="features" class="section">
+            <div class="container">
+                <h2 class="section-title">Why Choose Mikaris?</h2>
+                <div class="features-grid">
+                    <div class="feature">
+                        <div class="feature-icon">🛡️</div>
+                        <h3>DDoS Protection</h3>
+                        <p>Cloudflare-powered protection to keep your server online.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Instant Setup</h3>
+                        <p>Your server is ready within minutes of payment.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">💾</div>
+                        <h3>Daily Backups</h3>
+                        <p>Automatic backups with 7-day retention.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">🎮</div>
+                        <h3>All Games Supported</h3>
+                        <p>Minecraft, Rust, FiveM, CS2, and more.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">📊</div>
+                        <h3>Pterodactyl Panel</h3>
+                        <p>Industry-standard control panel for full control.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">💬</div>
+                        <h3>24/7 Support</h3>
+                        <p>Active Discord community and ticket system.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="faq" class="section">
+            <div class="container">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <div class="faq-question">❓ How do I pay?</div>
+                        <div class="faq-answer">We accept PayPal, CashApp, Venmo, and Cryptocurrency. DM us on Discord to place an order.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">❓ When do I get my server?</div>
+                        <div class="faq-answer">Within 24 hours of payment confirmation. Usually much faster!</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">❓ Is there a refund policy?</div>
+                        <div class="faq-answer">Yes — 7-day money-back guarantee for first-time customers.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">❓ Can I upgrade my plan later?</div>
+                        <div class="faq-answer">Absolutely! Prorated upgrades are available at any time.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">❓ What control panel do you use?</div>
+                        <div class="faq-answer">Pterodactyl Panel — the industry standard for game server management.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="logo" style="margin-bottom: 16px;">⚡ MIKARIS HOSTING</div>
+            <p style="color: #a1a1aa; margin-bottom: 24px;">Affordable, secure game server hosting for everyone.</p>
+            <a href="YOUR_DISCORD_INVITE_LINK" class="discord-invite">Join Our Discord →</a>
+            <p style="margin-top: 32px; font-size: 12px; color: #52525b;">
+                © 2026 Mikaris Hosting. All rights reserved.
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
